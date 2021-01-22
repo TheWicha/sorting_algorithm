@@ -1,0 +1,96 @@
+const wordList = [
+  { id: 1, word_hu: 'búcsúajándék' },
+  { id: 2, word_hu: 'Bőrönd' },
+  { id: 3, word_hu: 'betűz' },
+  { id: 4, word_hu: 'bácsi' },
+  { id: 5, word_hu: 'bejelöl' },
+  { id: 10, word_hu: 'áfjklsdfjk' },
+  { id: 10, word_hu: 'aáfjklsdffvk' },
+  { id: 11, word_hu: 'azjklsdfjk' },
+  { id: 11, word_hu: 'ahjklsdfjk' },
+  { id: 6, word_hu: 'büfé' },
+  { id: 7, word_hu: 'búcsúajándék' },
+  { id: 8, word_hu: 'ceruza' },
+  { id: 9, word_hu: 'baj' },
+];
+
+const alphabetIndex = {
+      a: 1,
+      á: 2,
+      b: 3,
+      c: 4,
+      d: 5,
+      e: 6,
+      é: 7,
+      f: 8,
+      g: 9,
+      h: 10,
+      i: 11,
+      í: 12,
+      j: 13,
+      k: 14,
+      l: 15,
+      m: 16,
+      n: 17,
+      o: 18,
+      ó: 19,
+      ö: 20,
+      ő: 21,
+      p: 22,
+      q: 23,
+      r: 24,
+      s: 25,
+      t: 26,
+      u: 27,
+      ú: 28,
+      ü: 29,
+      ű: 30,
+      v: 31,
+      w: 32,
+      x: 33,
+      y: 34,
+      z: 35,
+    };
+
+    const getWordsPair = (aWord, bWord) => {
+      const aWordArray = aWord.toLowerCase().replace(" ", "").split("");
+      const bWordArray = bWord.toLowerCase().replace(" ", "").split("");
+
+      let shouldReturn = false;
+
+      return aWordArray.reduce(
+        (acc, aWordletter, aWordIndex) => {
+          if (shouldReturn) {
+            return acc;
+          }
+
+          const bWordLetter = bWordArray[aWordIndex];
+          const aWordLetterNumber = alphabetIndex[aWordletter];
+          const bWordLetterNumber = alphabetIndex[bWordLetter];
+
+          acc[0].push(aWordLetterNumber);
+          acc[1].push(bWordLetterNumber);
+
+          shouldReturn = aWordLetterNumber !== bWordLetterNumber;
+
+          return acc;
+        },
+        [[], []]
+      );
+    };
+
+    const sortWords = (list) => {
+      return list.sort((aWordObject, bWordObject) => {
+        const aWord = aWordObject.word_hu;
+        const bWord = bWordObject.word_hu;
+
+        const wordsPair = getWordsPair(aWord, bWord);
+
+        const mappedAWord = wordsPair[0].join("");
+        const mappedBWord = wordsPair[1].join("");
+
+        return mappedAWord - mappedBWord;
+      });
+    };
+
+    const sortedDictionary = sortWords(wordList);
