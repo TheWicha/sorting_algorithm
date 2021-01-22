@@ -1,3 +1,4 @@
+```
 const wordList = [
   { id: 1, word_hu: 'búcsúajándék' },
   { id: 2, word_hu: 'Bőrönd' },
@@ -94,3 +95,4 @@ const alphabetIndex = {
     };
 
     const sortedDictionary = sortWords(wordList);
+    ```
