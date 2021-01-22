@@ -95,4 +95,4 @@ const alphabetIndex = {
     };
 
     const sortedDictionary = sortWords(wordList);
-    ```
+```
